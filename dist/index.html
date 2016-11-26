@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue_grey-red.min.css">
+    <link rel="stylesheet"
+      href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Filestack</span>
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="/add.html">Add</a>
+            <a class="mdl-navigation__link" href="">Blog</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer  mdl-layout--small-screen-only">
+        <span class="mdl-layout-title">Filestack</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/add.html">Add</a>
+          <a class="mdl-navigation__link" href="">Blog</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <div class="mdl-grid">
+            <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--12-col-phone">
+              <ul class="demo-list-three mdl-list" style="margin-left:50px;width:1000px;" id="profile-list"></ul>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">2016 Samuele Zaza, Filestack Tech. Evangelist</div>
+        </div>
+      </footer>
+    </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://api.filestackapi.com/filestack.js"></script>
+<script>
+  filepicker.setKey("AynkfxksOQNSa83fviAQKz");
+  const getFromServer = () => {
+  	return fetch('/profiles')
+  		.then(response => response.json())
+      .then(data => {
+        data.forEach((profile, i) => {
+          $('#profile-list').append(
+            `<li class="mdl-list__item mdl-list__item--three-line" style="height:initial;">
+              <span class="mdl-list__item-primary-content" style="height:initial;">
+                <img src="${profile.img}" style="
+                width: 100px;">
+                <span>${profile.name}</span>
+                <span class="mdl-list__item-text-body" style="margin-top:10px;">
+                  ${profile.description}
+                </span>
+              </span>
+              <span class="mdl-list__item-secondary-content">
+                <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+              </span>
+            </li>`
+          );
+        });
+      });
+  }
+  getFromServer();
+</script>
+
+  </body>
+</html>
